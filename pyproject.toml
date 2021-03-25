@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "python-nts"
+version = "0.0.1"
+description = "Korg NTS-1 Control Library"
+authors = ["Yui En <yui.github@mailbox.org>"]
+license = "GPL3"
+repository = "https://github.com/yui-nb/python-nts"
+readme = "README.md"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Multimedia :: Sound/Audio :: MIDI",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)"
+]
+packages = [
+    { "include" = "nts", "from" = "src" },
+]
+
+[tool.coverage.paths]
+source = ["src", "*/site-packages"]
+
+[tool.coverage.run]
+branch = true
+source = ["hypermodern_python"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.poetry.dependencies]
+python = "^3.6"
+python-rtmidi = "^1.4.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.2"
+pytest-cov = "^2.11.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

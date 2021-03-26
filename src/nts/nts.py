@@ -1,4 +1,6 @@
 from enum import Enum
+import rtmidi
+
 
 class FilterType(Enum):
     LP2 = 0
@@ -12,7 +14,15 @@ class FilterType(Enum):
 class NTS:
 
     def __init__(self, channel:int =0):
-        pass
+        self.__midi_out = rtmidi.MidiOut()
+        self.__midi_out.open_port(self.get_port_index())
+        self.channel = channel
+
+    def get_port_index(self) -> int:
+        for index, port in enumerate(self.__midi_out.get_ports()):
+            if "NTS" in port:
+                return index
+        return -1
 
     @property
     def filter_type(self) -> FilterType:

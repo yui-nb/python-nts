@@ -4,6 +4,6 @@ ignore = E203,E501, W503
 max-length = 90
 max-complexity = 10
 import-oder-style = google
-# application-import-names=
+application-import-names=nts,test
 strictness=short
 docstring_style=sphinx

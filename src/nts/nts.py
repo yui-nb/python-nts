@@ -5,6 +5,7 @@ FILTER_TYPE_CC = 42
 FILTER_CUTOFF_CC = 43
 FILTER_RESONANCE_CC = 44
 
+
 class FilterType(Enum):
     LP2 = 0
     LP4 = 18
@@ -14,13 +15,13 @@ class FilterType(Enum):
     HP4 = 90
     OFF = 127
 
-class NTS:
 
-    def __init__(self, channel:int =0):
+class NTS:
+    def __init__(self, channel: int = 0):
         self.__midi_out = rtmidi.MidiOut()
         self.__midi_out.open_port(self.get_port_index())
         self.channel: int = channel
-        
+
         self._filter_type: FilterType = FilterType.OFF
         self._filter_cutoff: int = 0
         self._filter_resonance: int = 0
@@ -56,5 +57,6 @@ class NTS:
     @filter_resonance.setter
     def filter_resonance(self, value: int):
         self._filter_resonance = value
-        self.__midi_out.send_message([0xB0, FILTER_RESONANCE_CC, self._filter_resonance])
-
+        self.__midi_out.send_message(
+            [0xB0, FILTER_RESONANCE_CC, self._filter_resonance]
+        )

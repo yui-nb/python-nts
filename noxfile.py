@@ -6,7 +6,7 @@ nox.options.sessions = "lint", "tests"
 
 
 @nox.session(python=["3.9", "3.8", "3.7"])
-def test(session):
+def tests(session):
     """Run test suite with pytest."""
     session.run("poetry", "install", external=True)
     session.run("pytest", "--cov")

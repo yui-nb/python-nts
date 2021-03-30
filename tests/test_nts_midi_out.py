@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from nts import NTS, FilterType
+from nts import NTS, FilterType, EnvelopeType
 
 from .fakeMIDI import FakeMIDIReceiver
 
@@ -39,3 +39,21 @@ def test_set_filter_resonance(midi_receiver, nts):
     nts.filter_resonance = 42
     time.sleep(0.1)
     assert midi_receiver.received == [[0xB0, 44, 42]]
+
+
+def test_set_eg_type(midi_receiver, nts):
+    nts.envelope_type = EnvelopeType.ARLOOP
+    time.sleep(0.1)
+    assert midi_receiver.received == [[0xB0, 14, 75]]
+
+
+def test_set_eg_attack(midi_receiver, nts):
+    nts.envelope_attack = 32
+    time.sleep(0.1)
+    assert midi_receiver.received == [[0xB0, 16, 32]]
+
+
+def test_set_eg_release(midi_receiver, nts):
+    nts.envelope_release = 120
+    time.sleep(0.1)
+    assert midi_receiver == [[0xB0, 19, 120]]

@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from nts import NTS, FilterType, EnvelopeType
+from nts import EnvelopeType, FilterType, NTS
 
 from .fakeMIDI import FakeMIDIReceiver
 

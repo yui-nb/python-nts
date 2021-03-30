@@ -56,4 +56,4 @@ def test_set_eg_attack(midi_receiver, nts):
 def test_set_eg_release(midi_receiver, nts):
     nts.envelope_release = 120
     time.sleep(0.1)
-    assert midi_receiver == [[0xB0, 19, 120]]
+    assert midi_receiver.received == [[0xB0, 19, 120]]

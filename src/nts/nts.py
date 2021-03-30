@@ -2,9 +2,13 @@ from enum import Enum
 
 import rtmidi
 
-FILTER_TYPE_CC = 42
-FILTER_CUTOFF_CC = 43
-FILTER_RESONANCE_CC = 44
+FILTER_TYPE_CC: int = 42
+FILTER_CUTOFF_CC: int = 43
+FILTER_RESONANCE_CC: int = 44
+
+ENEVELOPE_TYPE_CC: int = 14
+ENEVELOPE_ATTACK_CC: int = 16
+ENVELOPE_RELEASE_CC: int = 19
 
 
 class FilterType(Enum):
@@ -46,6 +50,10 @@ class NTS:
         self._filter_type: FilterType = FilterType.OFF
         self._filter_cutoff: int = 0
         self._filter_resonance: int = 0
+
+        self._eg_type: EnvelopeType = EnvelopeType.ADSR
+        self._eg_attack: int = 0
+        self._eg_release: int = 0
 
     # TODO: The constructor should propably take a port instead of searching for one
     def get_port_index(self) -> int:
@@ -120,24 +128,57 @@ class NTS:
 
     @property
     def envelope_type(self) -> EnvelopeType:
-        pass
+        """Returns the envelope type.
+
+        :return: The current envelope type as a EnvelopeType Enum.
+        :rtype: EnvelopeType
+        """
+        return self._eg_type
 
     @envelope_type.setter
     def envelope_type(self, value: EnvelopeType):
-        pass
-    
+        """Set the envelope type.
+
+        :param value: New envelope Type
+        :type value: EnvelopeType
+        """
+        self._eg_type = value
+        self.__midi_out.send_message([0xB0, ENEVELOPE_TYPE_CC, self._eg_type.value])
+
     @property
     def envelope_attack(self) -> int:
-        pass
+        """Returns the envelope attack value.
+
+        :return: envelope attack
+        :rtype: int
+        """
+        return self._eg_attack
 
     @envelope_attack.setter
     def envelope_attack(self, value: int):
-        pass
+        """Sets the envelope attack value
+
+        :param value: new envelope attack
+        :type value: int
+        """
+        self._eg_attack = value
+        self.__midi_out.send_message([0xB0, ENEVELOPE_ATTACK_CC, self._eg_attack])
 
     @property
     def envelope_release(self) -> int:
-        pass
+        """Returns the envelope release value.
+
+        :return: envelope release
+        :rtype: int
+        """
+        return self._eg_release
 
     @envelope_release.setter
     def envelope_release(self, value: int):
-        pass
+        """Sets the envelope release value.
+
+        :param value: new envelope release value
+        :type value: int
+        """
+        self._eg_release = value
+        self.__midi_out.send_message([0xB0, ENVELOPE_RELEASE_CC, self._eg_release])

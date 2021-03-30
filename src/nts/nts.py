@@ -117,3 +117,27 @@ class NTS:
         self.__midi_out.send_message(
             [0xB0, FILTER_RESONANCE_CC, self._filter_resonance]
         )
+
+    @property
+    def envelope_type(self) -> EnvelopeType:
+        pass
+
+    @envelope_type.setter
+    def envelope_type(self, value: EnvelopeType):
+        pass
+    
+    @property
+    def envelope_attack(self) -> int:
+        pass
+
+    @envelope_attack.setter
+    def envelope_attack(self, value: int):
+        pass
+
+    @property
+    def envelope_release(self) -> int:
+        pass
+
+    @envelope_release.setter
+    def envelope_release(self, value: int):
+        pass

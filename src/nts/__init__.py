@@ -1,1 +1,1 @@
-from .nts import NTS
+from .nts import NTS, FilterType

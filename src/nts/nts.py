@@ -59,13 +59,13 @@ class NTS:
         return self._filter_type
 
     @filter_type.setter
-    def filter_type(self, value: int):
+    def filter_type(self, val: FilterType):
         """Change the filter type.
 
         :param value: new filter type
         :type value: int
         """
-        self._filter_type = FilterType(value)
+        self._filter_type = val
         self.__midi_out.send_message([0xB0, FILTER_TYPE_CC, self._filter_type.value])
 
     @property

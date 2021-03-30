@@ -2,7 +2,7 @@ import time
 
 import pytest
 
-from nts import NTS
+from nts import NTS, FilterType
 
 from .fakeMIDI import FakeMIDIReceiver
 
@@ -24,7 +24,7 @@ def nts():
 # TODO: I need to find a better solution for this.
 # I'm not sure if its a good idea to put the thread on sleep
 def test_set_filter_type(midi_receiver, nts):
-    nts.filter_type = 127
+    nts.filter_type = FilterType.OFF
     time.sleep(0.1)
     assert midi_receiver.received == [[0xB0, 42, 127]]
 

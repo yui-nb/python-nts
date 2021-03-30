@@ -19,6 +19,16 @@ class FilterType(Enum):
     OFF = 127
 
 
+class EnvelopeType(Enum):
+    """Enum representing the Envelope Type and the corresponding MIDI value."""
+
+    ADSR = 0
+    AHR = 25
+    AR = 50
+    ARLOOP = 75
+    OPEN = 127
+
+
 class NTS:
     """This class represents a NTS-1 and all settings that are accessible via MIDI."""
 

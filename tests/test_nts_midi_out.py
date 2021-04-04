@@ -57,3 +57,14 @@ def test_set_eg_release(midi_receiver, nts):
     nts.envelope_release = 120
     time.sleep(0.1)
     assert midi_receiver.received == [[0xB0, 19, 120]]
+
+
+def test_set_osc_shape(midi_receiver, nts):
+    nts.shape = 34
+    time.sleep(0.1)
+    assert midi_receiver.received == [[0xB0, 54, 34]]
+
+def test_set_osc_alt(midi_receiver, nts):
+    nts.alt = 68
+    time.sleep(0.1)
+    assert midi_receiver.received == [[0xB0, 55, 68]]

@@ -10,6 +10,9 @@ ENEVELOPE_TYPE_CC: int = 14
 ENEVELOPE_ATTACK_CC: int = 16
 ENVELOPE_RELEASE_CC: int = 19
 
+OSCILLATOR_SHAPE_CC: int = 54
+OSCILLATOR_ALT_CC: int = 55
+
 
 class FilterType(Enum):
     """Enum that represents the filter type and maps it to it's corresponding value."""
@@ -54,6 +57,9 @@ class NTS:
         self._eg_type: EnvelopeType = EnvelopeType.ADSR
         self._eg_attack: int = 0
         self._eg_release: int = 0
+
+        self._osc_shape: int = 0
+        self._osc_alt: int = 0
 
     # TODO: The constructor should propably take a port instead of searching for one
     def get_port_index(self) -> int:
@@ -156,7 +162,7 @@ class NTS:
 
     @envelope_attack.setter
     def envelope_attack(self, value: int):
-        """Sets the envelope attack value
+        """Sets the envelope attack value.
 
         :param value: new envelope attack
         :type value: int
@@ -182,3 +188,41 @@ class NTS:
         """
         self._eg_release = value
         self.__midi_out.send_message([0xB0, ENVELOPE_RELEASE_CC, self._eg_release])
+
+    @property
+    def shape(self) -> int:
+        """Returns the oscillator shape value.
+
+        :return: oscillator shape
+        :rtype: int
+        """
+        return self._osc_shape
+
+    @shape.setter
+    def shape(self, value: int):
+        """Sets the oscillator shape value.
+
+        :param value: new oscillator shape
+        :type value: int
+        """
+        self._osc_shape = value
+        self.__midi_out.send_message([0xB0, OSCILLATOR_SHAPE_CC, self._osc_shape])
+
+    @property
+    def alt(self) -> int:
+        """Returns oscillator alt value.
+
+        :return: oscillator alt
+        :rtype: int
+        """
+        return self._osc_alt
+
+    @alt.setter
+    def alt(self, value: int):
+        """Sets oscillator alt value.
+
+        :param value: new oscillator alt
+        :type value: int
+        """
+        self._osc_alt = value
+        self.__midi_out.send_message([0xB0, OSCILLATOR_ALT_CC, self._osc_alt])

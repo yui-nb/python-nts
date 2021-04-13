@@ -64,6 +64,7 @@ def test_set_osc_shape(midi_receiver, nts):
     time.sleep(0.1)
     assert midi_receiver.received == [[0xB0, 54, 34]]
 
+
 def test_set_osc_alt(midi_receiver, nts):
     nts.alt = 68
     time.sleep(0.1)

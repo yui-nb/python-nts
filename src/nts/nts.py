@@ -14,6 +14,21 @@ OSCILLATOR_SHAPE_CC: int = 54
 OSCILLATOR_ALT_CC: int = 55
 
 
+def construct_midi_message(channel: int, control_change: int, value: int) -> tuple:
+    """Constructs a tuple that can be send as a MIDI Message via rtmidi.
+
+    :param channel: MIDI Channel
+    :type channel: int
+    :param control_change: Control Change
+    :type control_change: int
+    :param value: Message Value
+    :type value: int
+    :return: tuple containing the status and data bytes
+    :rtype: tuple
+    """
+    return (0xB0 | channel, control_change, value)
+
+
 class FilterType(Enum):
     """Enum that represents the filter type and maps it to it's corresponding value."""
 

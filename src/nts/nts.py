@@ -105,7 +105,11 @@ class NTS:
         :type value: int
         """
         self._filter_type = val
-        self.__midi_out.send_message([0xB0, FILTER_TYPE_CC, self._filter_type.value])
+        self.__midi_out.send_message(
+            construct_midi_message(
+                self.channel, FILTER_TYPE_CC, self._filter_type.value
+            )
+        )
 
     @property
     def filter_cutoff(self) -> int:
@@ -124,7 +128,9 @@ class NTS:
         :type value: int
         """
         self._filter_cutoff = value
-        self.__midi_out.send_message([0xB0, FILTER_CUTOFF_CC, self._filter_cutoff])
+        self.__midi_out.send_message(
+            construct_midi_message(self.channel, FILTER_CUTOFF_CC, self._filter_cutoff)
+        )
 
     @property
     def filter_resonance(self) -> int:
@@ -144,7 +150,9 @@ class NTS:
         """
         self._filter_resonance = value
         self.__midi_out.send_message(
-            [0xB0, FILTER_RESONANCE_CC, self._filter_resonance]
+            construct_midi_message(
+                self.channel, FILTER_RESONANCE_CC, self._filter_resonance
+            )
         )
 
     @property
@@ -164,7 +172,11 @@ class NTS:
         :type value: EnvelopeType
         """
         self._eg_type = value
-        self.__midi_out.send_message([0xB0, ENEVELOPE_TYPE_CC, self._eg_type.value])
+        self.__midi_out.send_message(
+            construct_midi_message(
+                self.channel, ENEVELOPE_TYPE_CC, self.envelope_type.value
+            )
+        )
 
     @property
     def envelope_attack(self) -> int:
@@ -183,7 +195,9 @@ class NTS:
         :type value: int
         """
         self._eg_attack = value
-        self.__midi_out.send_message([0xB0, ENEVELOPE_ATTACK_CC, self._eg_attack])
+        self.__midi_out.send_message(
+            construct_midi_message(self.channel, ENEVELOPE_ATTACK_CC, self._eg_attack)
+        )
 
     @property
     def envelope_release(self) -> int:
@@ -202,7 +216,9 @@ class NTS:
         :type value: int
         """
         self._eg_release = value
-        self.__midi_out.send_message([0xB0, ENVELOPE_RELEASE_CC, self._eg_release])
+        self.__midi_out.send_message(
+            construct_midi_message(self.channel, ENVELOPE_RELEASE_CC, self._eg_release)
+        )
 
     @property
     def shape(self) -> int:
@@ -221,7 +237,9 @@ class NTS:
         :type value: int
         """
         self._osc_shape = value
-        self.__midi_out.send_message([0xB0, OSCILLATOR_SHAPE_CC, self._osc_shape])
+        self.__midi_out.send_message(
+            construct_midi_message(self.channel, OSCILLATOR_SHAPE_CC, self._osc_shape)
+        )
 
     @property
     def alt(self) -> int:
@@ -240,4 +258,6 @@ class NTS:
         :type value: int
         """
         self._osc_alt = value
-        self.__midi_out.send_message([0xB0, OSCILLATOR_ALT_CC, self._osc_alt])
+        self.__midi_out.send_message(
+            construct_midi_message(self.channel, OSCILLATOR_ALT_CC, self._osc_alt)
+        )
